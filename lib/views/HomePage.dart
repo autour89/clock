@@ -1,7 +1,6 @@
-import 'package:clock/blocs/HomeBloc.dart';
 import 'package:clock/views/widgets/Count.dart';
+import 'package:clock/views/widgets/Resume.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -19,13 +18,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Count(),
+            Resume(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: context.read<HomeBloc>().increment,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }

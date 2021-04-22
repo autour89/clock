@@ -1,9 +1,23 @@
 class Counter {
-  int value = 0;
+  int _value = 0;
+  Function onUpdate;
 
-  void increment() => value++;
+  int get value => _value;
 
-  void decrement() => value--;
+  Counter({required this.onUpdate});
 
-  void reset() => value = 0;
+  void increment() {
+    _value++;
+    onUpdate();
+  }
+
+  void decrement() {
+    _value--;
+    onUpdate();
+  }
+
+  void reset() {
+    _value = 0;
+    onUpdate();
+  }
 }
