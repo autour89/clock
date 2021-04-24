@@ -21,10 +21,10 @@ class Counter {
   }
 
   void resume() {
-    _timer = Timer.periodic(Duration(milliseconds: 80), (_) => onUpdate());
-    _stopWatch.start();
     _isRun = true;
     _isReset = false;
+    _stopWatch.start();
+    _timer = Timer.periodic(Duration(milliseconds: 80), (_) => onUpdate());
   }
 
   void reset() {
