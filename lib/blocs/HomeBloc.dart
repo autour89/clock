@@ -20,10 +20,8 @@ class HomeBloc with ChangeNotifier {
     _counter = Counter(onUpdate: notifyListeners);
   }
 
-  void runTimer() {
-    _counter.isRun ? _counter.pause() : _counter.resume();
-    notifyListeners();
-  }
+  void runTimer() =>
+      _counter.isRun ? _counter.run = false : _counter.run = true;
 
   String _toTime(int x) => x < 10 ? '0$x' : x.toString();
 }
