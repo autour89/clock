@@ -12,6 +12,7 @@ class Count extends StatelessWidget {
         context.select<HomeBloc, String>((HomeBloc bloc) => bloc.duration);
     return Text(
       '$count',
+      textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.headline4,
     );
   }

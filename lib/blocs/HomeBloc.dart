@@ -1,51 +1,29 @@
-import 'dart:async';
-
 import 'package:clock/models/Counter.dart';
 import 'package:flutter/foundation.dart';
-import 'package:rxdart/rxdart.dart';
 
 class HomeBloc with ChangeNotifier {
-  late Counter counter;
-  late StreamSubscription<dynamic> _counterStream;
+  late Counter _counter;
 
-  bool get run => !_counterStream.isPaused;
+  Counter get counter => _counter;
 
   String get duration {
-    var duration = Duration(seconds: counter.value);
-    var hours = toTime(duration.inHours);
-    var min = toTime(duration.inMinutes.remainder(60));
-    var sec = toTime(duration.inSeconds.remainder(60));
+    var min = _toTime(_counter.value.inMinutes);
+    var sec = _toTime(_counter.value.inSeconds.remainder(60));
+    var miliSec = _toTime(_counter.value.inMilliseconds.remainder(100));
 
-    return '$hours:$min:$sec';
+    return _counter.value.inHours > 0
+        ? '${_counter.value.inHours}:$min:$sec.$miliSec'
+        : '$min:$sec.$miliSec';
   }
-
-  String toTime(int x) => x < 10 ? '0$x' : x.toString();
 
   HomeBloc() {
-    counter = Counter(onUpdate: notifyListeners);
-    _counterStream = Stream.periodic(Duration(seconds: 1))
-        .interval(Duration(seconds: 1))
-        .listen((_) => counter.increment());
-    pause();
+    _counter = Counter(onUpdate: notifyListeners);
   }
 
-  void runPause() {
-    if (run) {
-      pause();
-    } else {
-      resume();
-    }
+  void runTimer() {
+    _counter.isRun ? _counter.pause() : _counter.resume();
     notifyListeners();
   }
 
-  void pause() => _counterStream.pause();
-
-  void resume() => _counterStream.resume();
-
-  void reset() {
-    if (run) {
-      pause();
-    }
-    counter.reset();
-  }
+  String _toTime(int x) => x < 10 ? '0$x' : x.toString();
 }

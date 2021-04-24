@@ -13,15 +13,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Count(),
-            Resume(),
-          ],
-        ),
+        body: SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Flexible(
+            child: Count(),
+          ),
+          Expanded(
+            child: Resume(),
+          )
+        ],
       ),
-    );
+    ));
   }
 }

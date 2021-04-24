@@ -6,8 +6,6 @@ void main() {
   test('Counter value should be incremented', () {
     final counter = Counter(onUpdate: () => {});
 
-    counter.increment();
-
     expect(counter.value, 1);
   });
 }

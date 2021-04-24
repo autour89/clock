@@ -1,23 +1,36 @@
+import 'dart:async';
+
 class Counter {
-  int _value = 0;
+  late Timer _timer;
+  Stopwatch _stopWatch = Stopwatch();
+  bool _isReset = true;
+  bool _isRun = false;
+
   Function onUpdate;
 
-  int get value => _value;
+  bool get isReset => _isReset;
+  bool get isRun => _isRun;
+  Duration get value => _stopWatch.elapsed;
 
   Counter({required this.onUpdate});
 
-  void increment() {
-    _value++;
-    onUpdate();
+  void pause() {
+    _timer.cancel();
+    _stopWatch.stop();
+    _isRun = false;
   }
 
-  void decrement() {
-    _value--;
-    onUpdate();
+  void resume() {
+    _timer = Timer.periodic(Duration(milliseconds: 80), (_) => onUpdate());
+    _stopWatch.start();
+    _isRun = true;
+    _isReset = false;
   }
 
   void reset() {
-    _value = 0;
+    if (_isRun) pause();
+    _stopWatch.reset();
+    _isReset = true;
     onUpdate();
   }
 }

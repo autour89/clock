@@ -12,14 +12,15 @@ class Resume extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FloatingActionButton(
-            onPressed: context.read<HomeBloc>().runPause,
-            child: context.select<HomeBloc, bool>((HomeBloc bloc) => bloc.run)
-                ? Icon(Icons.pause_circle_filled)
+            onPressed: context.read<HomeBloc>().runTimer,
+            child: context.select<HomeBloc, bool>((bloc) => bloc.counter.isRun)
+                ? Icon(Icons.pause)
                 : Icon(Icons.timer)),
         SizedBox(width: 20),
-        FloatingActionButton(
-            onPressed: context.read<HomeBloc>().reset,
-            child: Icon(Icons.restore_rounded)),
+        if (context.select<HomeBloc, bool>((bloc) => !bloc.counter.isReset))
+          FloatingActionButton(
+              onPressed: context.read<HomeBloc>().counter.reset,
+              child: Icon(Icons.restore_rounded)),
       ],
     );
   }
