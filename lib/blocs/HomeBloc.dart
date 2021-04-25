@@ -1,10 +1,10 @@
-import 'package:clock/models/Counter.dart';
+import 'package:clock/models/StopWatch.dart';
 import 'package:flutter/foundation.dart';
 
 class HomeBloc with ChangeNotifier {
-  late Counter _counter;
+  late StopWatch _counter;
 
-  Counter get counter => _counter;
+  StopWatch get counter => _counter;
 
   String get duration {
     var min = _toTime(_counter.value.inMinutes);
@@ -17,7 +17,7 @@ class HomeBloc with ChangeNotifier {
   }
 
   HomeBloc() {
-    _counter = Counter(onUpdate: notifyListeners);
+    _counter = StopWatch(onUpdate: notifyListeners);
   }
 
   void runTimer() =>
