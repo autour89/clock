@@ -7,7 +7,7 @@ class Countdown extends StopWatch with Counter {
   Countdown({required this.duration, required Function onValueChanged})
       : super(onValueChanged: onValueChanged) {
     value = duration.inSeconds;
-    onUpdate = () => {decrement(), onValueChanged()};
+    onUpdate = () => decrement();
     updateDuration = Duration(seconds: 1);
   }
 

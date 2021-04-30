@@ -5,31 +5,29 @@ class StopWatch {
   Stopwatch _stopWatch = Stopwatch();
   bool _isReset = true;
 
-  late Function onUpdate;
-  late Duration updateDuration;
+  Duration updateDuration = Duration(milliseconds: 80);
+  Function onUpdate = () {};
   Function onValueChanged;
 
   bool get isReset => _isReset;
   bool get isRun => _stopWatch.isRunning;
   Duration get elapsed => _stopWatch.elapsed;
 
-  StopWatch({required this.onValueChanged}) {
-    onUpdate = () => onValueChanged();
-    updateDuration = Duration(milliseconds: 80);
-  }
+  StopWatch({required this.onValueChanged});
 
   set run(bool run) {
     switch (run) {
       case false:
         _stopWatch.stop();
         _timer.cancel();
+        onValueChanged();
         break;
       default:
         _isReset = false;
         _stopWatch.start();
-        _timer = Timer.periodic(updateDuration, (_) => onUpdate());
+        _timer = Timer.periodic(
+            updateDuration, (_) => {onUpdate(), onValueChanged()});
     }
-    onValueChanged();
   }
 
   void reset() {
