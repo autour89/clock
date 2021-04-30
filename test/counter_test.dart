@@ -4,8 +4,8 @@ import 'package:clock/models/StopWatch.dart';
 
 void main() {
   test('Counter value should be incremented', () {
-    final counter = StopWatch(onUpdate: () => {});
+    final counter = StopWatch(onValueChanged: () => {});
 
-    expect(counter.value, 1);
+    expect(counter.elapsed, 1);
   });
 }

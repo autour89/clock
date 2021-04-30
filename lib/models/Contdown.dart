@@ -1,12 +1,19 @@
-import 'dart:async' as timer;
 import 'package:clock/models/Counter.dart';
+import 'package:clock/models/StopWatch.dart';
 
-class Countdown with Counter {
-  late timer.Timer _timer;
+class Countdown extends StopWatch with Counter {
+  late Duration duration;
 
-  int value = 0;
+  Countdown({required this.duration, required Function onValueChanged})
+      : super(onValueChanged: onValueChanged) {
+    value = duration.inSeconds;
+    onUpdate = () => {decrement(), onValueChanged()};
+    updateDuration = Duration(seconds: 1);
+  }
 
-  Countdown() {
-    _timer = timer.Timer.periodic(Duration(seconds: 1), (_) => {});
+  @override
+  void reset() {
+    value = duration.inSeconds;
+    super.reset();
   }
 }

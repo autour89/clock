@@ -1,27 +1,30 @@
+import 'package:clock/models/Contdown.dart';
 import 'package:clock/models/StopWatch.dart';
 import 'package:flutter/foundation.dart';
+import '../services/extensions.dart';
 
 class HomeBloc with ChangeNotifier {
-  late StopWatch _counter;
+  late StopWatch _stopwatch;
+  late Countdown _countdown;
 
-  StopWatch get counter => _counter;
+  // StopWatch get counter => _stopwatch;
+  Countdown get counter => _countdown;
 
-  String get duration {
-    var min = _toTime(_counter.value.inMinutes);
-    var sec = _toTime(_counter.value.inSeconds.remainder(60));
-    var miliSec = _toTime(_counter.value.inMilliseconds.remainder(100));
+  String get duration => Duration(seconds: _countdown.value).timer();
 
-    return _counter.value.inHours > 0
-        ? '${_counter.value.inHours}:$min:$sec.$miliSec'
-        : '$min:$sec.$miliSec';
-  }
+  String get stopwatchDuration => _stopwatch.elapsed.stopwatch();
 
   HomeBloc() {
-    _counter = StopWatch(onUpdate: notifyListeners);
+    _stopwatch = StopWatch(onValueChanged: () => _notifyValueChanged());
+    _countdown = Countdown(
+        duration: Duration(minutes: 5),
+        onValueChanged: () => _notifyValueChanged());
+  }
+
+  void _notifyValueChanged() {
+    notifyListeners();
   }
 
   void runTimer() =>
-      _counter.isRun ? _counter.run = false : _counter.run = true;
-
-  String _toTime(int x) => x < 10 ? '0$x' : x.toString();
+      _countdown.isRun ? _countdown.run = false : _countdown.run = true;
 }
