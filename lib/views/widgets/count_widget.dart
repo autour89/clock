@@ -1,4 +1,4 @@
-import 'package:clock/blocs/HomeBloc.dart';
+import 'package:clock/blocs/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';

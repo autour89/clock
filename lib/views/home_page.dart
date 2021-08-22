@@ -1,9 +1,9 @@
-import 'package:clock/views/widgets/Count.dart';
-import 'package:clock/views/widgets/Resume.dart';
+import 'package:clock/views/widgets/count_widget.dart';
+import 'package:clock/views/widgets/resume_button.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
         body: SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+        children: [
           Flexible(
             child: Count(),
           ),

@@ -1,5 +1,5 @@
-import 'package:clock/blocs/HomeBloc.dart';
-import 'package:clock/views/HomePage.dart';
+import 'package:clock/blocs/home_bloc.dart';
+import 'package:clock/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
