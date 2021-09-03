@@ -1,25 +1,15 @@
-import 'package:clock/models/counter_model.dart';
 import 'package:clock/models/stop_watch.dart';
 
-class Countdown extends StopWatch with Counter {
-  late Duration duration;
-
-  Countdown({required this.duration, required Function onValueChanged})
-      : super(onValueChanged: onValueChanged) {
+class Countdown extends StopWatch {
+  Countdown({required Duration duration, required Function onValueChanged})
+      : super(onValueChanged: onValueChanged, duration: duration) {
     value = duration.inSeconds;
-    onUpdate = () => decrement();
-    updateDuration = const Duration(seconds: 1);
-  }
-
-  @override
-  void reset() {
-    value = duration.inSeconds;
-    super.reset();
+    isUp = false;
   }
 
   set newTime(Duration duration) {
     this.duration = duration;
-    value = this.duration.inSeconds;
+    value = duration.inSeconds;
     onValueChanged();
   }
 }

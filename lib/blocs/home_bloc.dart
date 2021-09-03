@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import '../services/extensions.dart';
 
-class HomeBloc with ChangeNotifier {
+class HomeBloc extends ChangeNotifier {
   late StopWatch _stopwatch;
   late Countdown _countdown;
 

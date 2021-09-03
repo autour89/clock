@@ -1,5 +1,9 @@
-class Counter {
+mixin Counter {
   int value = 0;
+
+  bool isUp = false;
+
+  Duration get elapsed => Duration(seconds: value);
 
   void increment() => value++;
 

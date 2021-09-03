@@ -8,10 +8,8 @@ class Count extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final count =
-        context.select<HomeBloc, String>((HomeBloc bloc) => bloc.duration);
     return Text(
-      '$count',
+      context.select<HomeBloc, String>((HomeBloc bloc) => bloc.duration),
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.headline4,
     );
