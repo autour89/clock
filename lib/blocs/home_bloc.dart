@@ -14,14 +14,10 @@ class HomeBloc extends ChangeNotifier {
   String get duration => _countdown.elapsed.timer();
 
   HomeBloc() {
-    _stopwatch = StopWatch(onValueChanged: () => _notifyValueChanged());
+    _stopwatch = StopWatch(onValueChanged: () => notifyListeners());
     _countdown = Countdown(
         duration: const Duration(minutes: 5),
-        onValueChanged: () => _notifyValueChanged());
-  }
-
-  void _notifyValueChanged() {
-    notifyListeners();
+        onValueChanged: () => notifyListeners());
   }
 
   void runTimer() =>
