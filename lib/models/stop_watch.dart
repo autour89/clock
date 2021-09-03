@@ -2,30 +2,27 @@ import 'dart:async';
 import 'package:clock/models/counter_model.dart';
 
 class StopWatch with Counter {
-  late Timer _timer;
+  Timer? _timer;
   bool _isReset = true;
-  bool _isRunning = false;
   final Duration _updateDelay = const Duration(seconds: 1);
-  Duration duration;
 
   Function onValueChanged;
 
   bool get isReset => _isReset;
-  bool get isRun => _isRunning;
+  bool get isRun => _timer == null ? false : _timer!.isActive;
 
-  StopWatch({required this.onValueChanged, this.duration = Duration.zero}) {
+  StopWatch({required this.onValueChanged}) {
     isUp = true;
   }
 
   set run(bool run) {
-    _isRunning = run;
     switch (run) {
       case true:
         _isReset = false;
         _timer = Timer.periodic(_updateDelay, (_) => onUpdate());
         break;
       case false:
-        _timer.cancel();
+        _timer?.cancel();
         break;
     }
     onValueChanged();
@@ -41,7 +38,7 @@ class StopWatch with Counter {
   }
 
   void reset() {
-    value = isUp ? 0 : duration.inSeconds;
+    value = duration.inSeconds;
     _isReset = true;
     run = false;
   }
