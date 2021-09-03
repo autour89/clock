@@ -12,7 +12,7 @@ class HomeBloc extends ChangeNotifier {
   Countdown get counter => _countdown;
 
   // String get duration => _stopwatch.elapsed.stopwatch();
-  String get duration => Duration(seconds: _countdown.value).timer();
+  String get duration => _countdown.elapsed.timer();
 
   HomeBloc() {
     _stopwatch = StopWatch(onValueChanged: () => _notifyValueChanged());
@@ -26,6 +26,6 @@ class HomeBloc extends ChangeNotifier {
   }
 
   void runTimer() =>
-      // _stopwatch.isRun ? _stopwatch.run = false : _stopwatch.run = true;
-      _countdown.isRun ? _countdown.run = false : _countdown.run = true;
+      // _stopwatch.run = !_stopwatch.isRun;
+      _countdown.run = !_countdown.isRun;
 }
