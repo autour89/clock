@@ -1,8 +1,7 @@
 import 'package:clock/models/count_down.dart';
 import 'package:clock/models/stop_watch.dart';
+import 'package:clock/services/extensions.dart';
 import 'package:flutter/foundation.dart';
-
-import '../services/extensions.dart';
 
 class HomeBloc extends ChangeNotifier {
   late StopWatch _stopwatch;
