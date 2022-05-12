@@ -1,16 +1,16 @@
-import 'package:clock/models/watch.dart';
-import 'package:clock/services/extensions.dart';
 import 'package:flutter/foundation.dart';
+import 'package:timer/models/watch.dart';
+import 'package:timer/services/extensions.dart';
 
 class HomeBloc extends ChangeNotifier {
   late Watch _stopwatch;
   late Watch _countdown;
 
-  // Watch get counter => _stopwatch;
+  Watch get stopwatch => _stopwatch;
   Watch get counter => _countdown;
 
-  // String get duration => _stopwatch.elapsed.stopwatch();
-  String get duration => _countdown.elapsed.timer();
+  String get timeDuration => _stopwatch.elapsed.stopwatch();
+  String get timerDuration => _countdown.elapsed.timer();
 
   HomeBloc() {
     _stopwatch =
@@ -21,7 +21,11 @@ class HomeBloc extends ChangeNotifier {
         onValueChanged: () => notifyListeners());
   }
 
-  void runTimer() =>
-      // _stopwatch.run = !_stopwatch.isRun;
-      _countdown.run = !_countdown.isRun;
+  void runStopWatch() {
+    _stopwatch.run = !_stopwatch.isRun;
+  }
+
+  void runTimer() {
+    _countdown.run = !_countdown.isRun;
+  }
 }

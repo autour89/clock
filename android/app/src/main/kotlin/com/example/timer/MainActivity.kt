@@ -1,4 +1,4 @@
-package com.example.clock
+package com.example.timer
 
 import io.flutter.embedding.android.FlutterActivity
 

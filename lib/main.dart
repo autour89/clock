@@ -1,7 +1,7 @@
-import 'package:clock/blocs/home_bloc.dart';
-import 'package:clock/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:timer/blocs/home_bloc.dart';
+import 'package:timer/views/home_page.dart';
 
 void main() {
   runApp(const MyApp());

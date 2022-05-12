@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:clock/models/counter.dart';
+
+import 'package:timer/models/counter.dart';
 
 class Watch with Counter {
   Timer? _timer;

@@ -1,10 +1,11 @@
-import 'package:clock/blocs/home_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:timer/blocs/home_bloc.dart';
 
-class Resume extends StatelessWidget {
-  const Resume({Key? key}) : super(key: key);
+class CommandsView extends StatelessWidget {
+  final bool isTimer;
+
+  const CommandsView({Key? key, required this.isTimer}) : super(key: key);
 
   void _selectTime(BuildContext context) async {
     final TimeOfDay? newTime = await showTimePicker(
@@ -34,14 +35,20 @@ class Resume extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FloatingActionButton(
-            onPressed: context.read<HomeBloc>().runTimer,
-            child: context.select<HomeBloc, bool>((bloc) => bloc.counter.isRun)
+            onPressed: isTimer
+                ? context.read<HomeBloc>().runTimer
+                : context.read<HomeBloc>().runStopWatch,
+            child: context.select<HomeBloc, bool>((bloc) =>
+                    isTimer ? bloc.counter.isRun : bloc.stopwatch.isRun)
                 ? const Icon(Icons.pause)
                 : const Icon(Icons.timer)),
         const SizedBox(width: 20),
-        if (context.select<HomeBloc, bool>((bloc) => !bloc.counter.isReset))
+        if (context.select<HomeBloc, bool>((bloc) =>
+            isTimer ? !bloc.counter.isReset : !bloc.stopwatch.isReset))
           FloatingActionButton(
-              onPressed: context.read<HomeBloc>().counter.reset,
+              onPressed: isTimer
+                  ? context.read<HomeBloc>().counter.reset
+                  : context.read<HomeBloc>().stopwatch.reset,
               child: const Icon(Icons.restore_rounded)),
         FloatingActionButton(
           onPressed: () => _selectTime(context),
